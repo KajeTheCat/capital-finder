@@ -24,7 +24,7 @@ class handler(BaseHTTPRequestHandler):
             message = str(data)
 
         else:
-            message = "Give me a country or capital"
+            message = "Give me a country"
 
         self.send_response(200)
         self.send_header('Content-type','text/plain')
