@@ -13,18 +13,18 @@ class handler(BaseHTTPRequestHandler):
         query_string_list = parse.parse_qsl(url_components.query)
         dic = dict(query_string_list)
 
-        if "state" in dic:
-            url = "https://restcountries.com/#rest-countries"
-            r = requests.get(url + dic["state"])
+        if "country" in dic:
+            url = f"https://restcountries.com/v3.1/name/{dic["country"]}?fullText=true"
+            r = requests.get(url)
             data = r.json()
             capitals = []
-            for state_data in data:
-                capital = state_data["states"][0]["capitals"][0]["capital"]
-                capitals.append(capital)
-            message = str("the capital of "state " is " capital)
+            # for country_data in data:
+            #     capital = country_data["countries"][0]["capitals"][0]["capital"]
+            #     capitals.append(capital)
+            message = str(data)
 
         else:
-            message = "Give me a state or capital"
+            message = "Give me a country or capital"
 
         self.send_response(200)
         self.send_header('Content-type','text/plain')
